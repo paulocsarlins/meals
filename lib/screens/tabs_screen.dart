@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'categories_screen.dart';
 import 'favorite_screen.dart';
+import '../components/main_drawer.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({Key? key}) : super(key: key);
@@ -14,11 +15,11 @@ class _TabScreenState extends State<TabScreen> {
   final List<Map<String, Object>> _screens = [
     {
       'title': 'Lista de Categorias',
-      'screen': CategoriesScreen(),
+      'screen': const CategoriesScreen(),
     },
     {
       'title': 'Meus favoritos',
-      'screen': FavoriteScreen(),
+      'screen': const FavoriteScreen(),
     }
   ];
 
@@ -36,14 +37,15 @@ class _TabScreenState extends State<TabScreen> {
           _screens[_selectedScreenIndex]['title'] as String,
         ),
       ),
+      drawer: const MainDrawer(),
       body: _screens[_selectedScreenIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectedScreen,
         backgroundColor: Theme.of(context).primaryColor,
         unselectedItemColor: Colors.white,
-        selectedItemColor: Theme.of(context).accentColor,
+        selectedItemColor: Theme.of(context).colorScheme.secondary,
         currentIndex: _selectedScreenIndex,
-        items: [
+        items: const  [
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: 'Categorias',

@@ -6,7 +6,7 @@ class MealDetailScreen extends StatelessWidget {
 
   Widget _createSectionTitle(BuildContext context, String title) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
         style: Theme.of(context).textTheme.headline6,
@@ -18,8 +18,8 @@ class MealDetailScreen extends StatelessWidget {
     return Container(
       width: 330,
       height: 200,
-      padding: EdgeInsets.all(10),
-      margin: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.grey),
@@ -40,7 +40,7 @@ class MealDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -52,8 +52,9 @@ class MealDetailScreen extends StatelessWidget {
             _createSectionContainer(
               ListView.builder(
                 itemCount: meal.ingredients.length,
-                itemBuilder: ((context, index) {
+                itemBuilder: (ctx, index) {
                   return Card(
+                    color: Theme.of(context).colorScheme.secondary,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 5,
@@ -61,9 +62,8 @@ class MealDetailScreen extends StatelessWidget {
                       ),
                       child: Text(meal.ingredients[index]),
                     ),
-                    color: Theme.of(context).accentColor,
                   );
-                }),
+                },
               ),
             ),
             _createSectionTitle(context, 'Passos'),
@@ -79,7 +79,7 @@ class MealDetailScreen extends StatelessWidget {
                         ),
                         title: Text(meal.steps[index]),
                       ),
-                      Divider(),
+                      const Divider(),
                     ],
                   );
                 },
