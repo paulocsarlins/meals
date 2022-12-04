@@ -2,28 +2,38 @@ import 'package:flutter/material.dart';
 import 'categories_screen.dart';
 import 'favorite_screen.dart';
 import '../components/main_drawer.dart';
+import '../models/meal.dart';
 
-class TabScreen extends StatefulWidget {
-  const TabScreen({Key? key}) : super(key: key);
+class TabsScreen extends StatefulWidget {
+  final List<Meal> favoriteMeals;
+
+  const TabsScreen(this.favoriteMeals, {Key? key}) : super(key: key);
 
   @override
-  State<TabScreen> createState() => _TabScreenState();
+  State<TabsScreen> createState() => _TabsScreenState();
 }
 
-class _TabScreenState extends State<TabScreen> {
+class _TabsScreenState extends State<TabsScreen> {
   int _selectedScreenIndex = 0;
-  final List<Map<String, Object>> _screens = [
-    {
-      'title': 'Lista de Categorias',
-      'screen': const CategoriesScreen(),
-    },
-    {
-      'title': 'Meus favoritos',
-      'screen': const FavoriteScreen(),
-    }
-  ];
 
-  _selectedScreen(int index) {
+  List<Map<String, Object>>? _screens;
+
+  @override
+  void initState() {
+    super.initState();
+    _screens = [
+      {
+        'title': 'Lista de Categorias',
+        'screen': const CategoriesScreen(),
+      },
+      {
+        'title': 'Meus Favoritos',
+        'screen': FavoriteScreen(widget.favoriteMeals),
+      },
+    ];
+  }
+
+  _selectScreen(int index) {
     setState(() {
       _selectedScreenIndex = index;
     });
@@ -34,18 +44,18 @@ class _TabScreenState extends State<TabScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _screens[_selectedScreenIndex]['title'] as String,
+          _screens![_selectedScreenIndex]['title'] as String,
         ),
       ),
       drawer: const MainDrawer(),
-      body: _screens[_selectedScreenIndex]['screen'] as Widget,
+      body: _screens![_selectedScreenIndex]['screen'] as Widget,
       bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectedScreen,
-        backgroundColor: Theme.of(context).primaryColor,
+        onTap: _selectScreen,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         unselectedItemColor: Colors.white,
         selectedItemColor: Theme.of(context).colorScheme.secondary,
         currentIndex: _selectedScreenIndex,
-        items: const  [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.category),
             label: 'Categorias',

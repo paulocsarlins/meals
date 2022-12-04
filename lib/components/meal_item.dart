@@ -5,17 +5,17 @@ import '../utils/app_routes.dart';
 class MealItem extends StatelessWidget {
   final Meal meal;
 
-  const MealItem({Key? key, required this.meal}) : super(key: key);
+  const MealItem(this.meal, {Key? key}) : super(key: key);
 
   void _selectMeal(BuildContext context) {
     Navigator.of(context)
         .pushNamed(
-      AppRoutes.meal_detail,
+      AppRoutes.mealDetail,
       arguments: meal,
     )
         .then((result) {
       if (result == null) {
-        print('Sem resultado');
+        print('Sem resultado!');
       } else {
         print('O nome da refeição é $result.');
       }
@@ -49,8 +49,8 @@ class MealItem extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  right: 10,
                   bottom: 20,
+                  right: 10,
                   child: Container(
                     width: 300,
                     color: Colors.black54,
@@ -94,12 +94,12 @@ class MealItem extends StatelessWidget {
                     children: [
                       const Icon(Icons.attach_money),
                       const SizedBox(width: 6),
-                      Text(meal.cosText),
+                      Text(meal.costText),
                     ],
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

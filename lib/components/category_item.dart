@@ -3,13 +3,13 @@ import '../models/category.dart';
 import '../utils/app_routes.dart';
 
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({Key? key, required this.category}) : super(key: key);
-
   final Category category;
 
-  void _selecteCategory(BuildContext context) {
+  const CategoryItem(this.category, {Key? key}) : super(key: key);
+
+  void _selectCategory(BuildContext context) {
     Navigator.of(context).pushNamed(
-      AppRoutes.categories_meals,
+      AppRoutes.categoriesMeals,
       arguments: category,
     );
   }
@@ -17,8 +17,8 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _selecteCategory(context),
-      splashColor: Theme.of(context).primaryColor,
+      onTap: () => _selectCategory(context),
+      splashColor: Theme.of(context).colorScheme.primary,
       borderRadius: BorderRadius.circular(15),
       child: Container(
         padding: const EdgeInsets.all(15),
@@ -41,3 +41,4 @@ class CategoryItem extends StatelessWidget {
     );
   }
 }
+

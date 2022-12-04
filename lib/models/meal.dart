@@ -54,7 +54,7 @@ class Meal {
     }
   }
 
-    String get cosText {
+  String get costText {
     switch (cost) {
       case Cost.cheap:
         return 'Barato';
@@ -63,7 +63,7 @@ class Meal {
       case Cost.expensive:
         return 'Caro';
       default:
-        return 'Desconhecida';
+        return 'Desconhecido';
     }
   }
 }
